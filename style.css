@@ -1,0 +1,615 @@
+
+
+/* -------------------- */
+/* ESTILO VISUAL MODERNO - CONTROLE DE PRESENÇA */
+/* -------------------- */
+
+/* ======== REMOVE O HEADER PADRÃO (FAIXA PRETA) ======== */
+header, div[data-testid="stHeader"], section[data-testid="stHeader"] {
+    display: none !important;
+}
+
+/* ===== FUNDO E CONTAINER ===== */
+html, body, section.main, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
+    background-color: #fafafa !important; /* tom off-white */
+    color: #000000 !important;
+}
+
+.main-block {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem 3rem;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+/* ===== TEXTOS ===== */
+h1, h2, h3, h4, h5, h6, label, p, span, div, strong {
+    color: #000000 !important;
+    font-family: "Helvetica", "Segoe UI", sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.3rem !important;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.8rem !important;
+    color: #333333 !important;
+}
+
+.ccb-section-title {
+    text-align: center !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: #000000 !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* ===== CAMPOS ===== */
+input, textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+    border-radius: 10px !important;
+    padding: 0.6rem !important;
+    transition: 0.25s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #000000 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* =========================================================
+   SELECTBOX CLARO + SEM PARÊNTESES / SEM FOCO VERDE
+   ========================================================= */
+
+//* ======= SELECTBOX PADRÃO ======= */
+div[data-baseweb="select"], div[data-baseweb="select"] > div {
+    background-color: #ffffff !important;
+    color: #000 !important;
+    border: 1.8px solid #000 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    font-size: 16px !important;
+}
+
+div[data-baseweb="select"] span,
+div[data-baseweb="select"] svg {
+    color: #000 !important;
+}
+
+ul[role="listbox"] {
+    max-height: 250px !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: #999 #f0f0f0;
+    border-radius: 10px !important;
+}
+
+ul[role="listbox"] > li {
+    padding: 10px 16px !important;
+    font-size: 15px !important;
+    border-bottom: 1px solid #eee !important;
+}
+
+ul[role="listbox"] > li:hover {
+    background-color: #f0f0f0 !important;
+}
+/* ===== BOTÃO MODERNO ===== */
+div.stButton {
+    display: flex !important;
+    justify-content: center !important;
+    background: none !important;
+    border: none !important;
+    margin-top: 2rem !important;
+}
+
+div.stButton > button {
+    background-color: #1B4332 !important; /* verde escuro elegante */
+    color: #ffffff !important; /* texto branco */
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    border-radius: 10px !important;
+    border: none !important;
+    padding: 0.7em 1.8em !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover: verde um pouco mais claro */
+div.stButton > button:hover {
+    background-color: #2D6A4F !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Clique: verde vivo */
+div.stButton > button:active {
+    background-color: #40916C !important;
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ===== FORM ===== */
+.stForm {
+    border-radius: 15px !important;
+    background: #ffffff !important;
+    padding: 2rem !important;
+    border: 1px solid #e6e6e6 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ======= CORRIGE DROPBOX ABERTO COM BACKGROUND CLARO ======= */
+ul[role="listbox"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Corrige cada item da lista (funciona melhor do que li direto) */
+div[role="option"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 16px !important;
+    padding: 10px 14px !important;
+    border-bottom: 1px solid #eeeeee !important;
+}
+
+/* Hover no item */
+div[role="option"]:hover {
+    background-color: #f0f0f0 !important;
+    color: #000000 !important;
+}
+
+/* === ESTILO DO DROPDOWN ABERTO === */
+ul[data-testid="stSelectboxVirtualDropdown"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Estiliza cada item da lista */
+ul[data-testid="stSelectboxVirtualDropdown"] li[role="option"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 16px !important;
+    padding: 12px 18px !important;
+    border-bottom: 1px solid #eeeeee !important;
+}
+
+/* Hover nos itens */
+ul[data-testid="stSelectboxVirtualDropdown"] li[role="option"]:hover {
+    background-color: #f2f2f2 !important;
+    color: #000000 !important;
+    cursor: pointer !important;
+}
+
+/* ========== FORÇA TEXTO PRETO EM TODO O APP (NÍVEL MÁXIMO) ========== */
+html * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important; /* cobre casos em que o Streamlit usa webkit-text-fill-color */
+  opacity: 1 !important;
+}
+
+/* Força preto em spans com cores RGBA cinzas */
+span[style*="color: rgba"], div[style*="color: rgba"], p[style*="color: rgba"], label[style*="color: rgba"] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  opacity: 1 !important;
+}
+
+/* Corrige texto dentro de inputs e selects */
+input, textarea, select, div[data-baseweb="select"] * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  caret-color: #000000 !important;
+}
+
+/* Corrige placeholders */
+::placeholder {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  opacity: 0.8 !important;
+}
+
+/* === Força preto nos selects, inclusive no iframe interno === */
+[data-baseweb="select"] * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* ===== BOTÃO ESTILO VERDE MODERNO (COMPATÍVEL COM STREAMLIT 1.40+) ===== */
+button[kind="primary"],
+div.stButton button,
+div[data-testid="stFormSubmitButton"] button {
+    background-color: #1B4332 !important; /* verde escuro elegante */
+    color: #ffffff !important; /* texto branco */
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    border-radius: 10px !important;
+    border: none !important;
+    padding: 0.7em 1.8em !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover: verde mais claro */
+button[kind="primary"]:hover,
+div.stButton button:hover,
+div[data-testid="stFormSubmitButton"] button:hover {
+    background-color: #2D6A4F !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Clique: verde vivo */
+button[kind="primary"]:active,
+div.stButton button:active,
+div[data-testid="stFormSubmitButton"] button:active {
+    background-color: #40916C !important;
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Remove o preto forçado herdado de html * */
+button, div.stButton button, div[data-testid="stFormSubmitButton"] button * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* ===== SELECTBOX LIMPO FINAL (SEM ÍCONE, SEM DUPLA BORDA) ===== */
+div[data-baseweb="select"] {
+    background-color: #ffffff !important;
+    border: 1.6px solid #000000 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+/* remove completamente qualquer camada interna, sombra, tag ou ícone */
+div[data-baseweb="select"] * {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+div[data-baseweb="select"] [data-baseweb="adornment"],
+div[data-baseweb="select"] [data-baseweb="tag"],
+div[data-baseweb="select"] [aria-hidden="true"],
+div[data-baseweb="select"] [role="img"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* remove o contorno interno (segunda borda) */
+div[data-baseweb="select"] > div {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* ajusta espaçamento do texto */
+div[data-baseweb="select"] > div:first-child {
+    padding-left: 12px !important;
+}
+
+/* mantém a seta da direita */
+div[data-baseweb="select"] svg {
+    display: inline-block !important;
+    color: #000000 !important;
+}
+
+/* define largura natural */
+div[data-baseweb="select"] {
+    width: 100% !important;
+    max-width: 700px !important; /* limite estético */
+    margin: 0 auto !important;
+}
+
+/* ===== REMOVE A CAIXA INTERNA DE INPUT QUE APARECE DENTRO DO SELECT ===== */
+div[data-baseweb="select"] input {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* remove o realce verde interno ao focar */
+div[data-baseweb="select"] input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* remove borda e contorno interno quando o select está ativo */
+div[data-baseweb="select"]:focus-within {
+    border: 1.6px solid #2D6A4F !important; /* mantém o contorno verde leve de fora */
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.15) !important;
+}
+
+/* força o campo interno a não exibir moldura */
+div[data-baseweb="select"] div[class*="ControlContainer"],
+div[data-baseweb="select"] div[class*="ControlContainer"]:focus-within {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* ======== GARANTE APENAS UMA BORDA NO SELECTBOX ======== */
+div[data-baseweb="select"] {
+  border: 1.6px solid #000000 !important;   /* borda única */
+  border-radius: 10px !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+div[data-baseweb="select"] > div,
+div[data-baseweb="select"] div[class*="ControlContainer"],
+div[data-baseweb="select"] div[class*="ControlContainer"]:focus-within {
+  border: none !important;      /* remove qualquer borda interna */
+  box-shadow: none !important;  /* remove sombra duplicada */
+  outline: none !important;
+  background: transparent !important;
+}
+
+/* mantém o foco verde só na borda externa */
+div[data-baseweb="select"]:focus-within {
+  border-color: #2D6A4F !important;
+  box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.15) !important;
+}
+
+/* ======== BORDA ÚNICA PARA SELECTBOX ======== */
+
+/* só a borda externa preta */
+div[data-baseweb="select"] {
+  border: 1.6px solid #000000 !important;
+  border-radius: 10px !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+/* apaga completamente qualquer borda ou outline interno */
+div[data-baseweb="select"] > div,
+div[data-baseweb="select"] div[class*="ControlContainer"],
+div[data-baseweb="select"] div[class*="ControlContainer"]:focus-within,
+div[data-baseweb="select"] div[class*="ValueContainer"] {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* remove também pseudo-bordas */
+div[data-baseweb="select"]::before,
+div[data-baseweb="select"]::after,
+div[data-baseweb="select"] div[class*="ControlContainer"]::before,
+div[data-baseweb="select"] div[class*="ControlContainer"]::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* mantém o foco verde apenas na borda externa */
+div[data-baseweb="select"]:focus-within {
+  border-color: #2D6A4F !important;
+  box-shadow: 0 0 0 2px rgba(45,106,79,0.15) !important;
+}
+
+/* ======== BORDA ÚNICA FINAL PARA SELECTBOX ======== */
+
+/* 1️⃣ Borda externa preta única */
+div[data-baseweb="select"] {
+  border: 1.6px solid #000 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  outline: none !important;
+}
+
+/* 2️⃣ Remove qualquer outline ou sombra interna ao focar */
+div[data-baseweb="select"]:focus,
+div[data-baseweb="select"]:focus-visible,
+div[data-baseweb="select"]:focus-within {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(45,106,79,0.15) !important; /* leve brilho verde */
+  border: 1.6px solid #2D6A4F !important; /* verde no foco */
+}
+
+/* 3️⃣ Remove borda interna do container de valor */
+div[data-baseweb="select"] > div,
+div[data-baseweb="select"] div[class*="ControlContainer"],
+div[data-baseweb="select"] div[class*="ValueContainer"] {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+/* 4️⃣ Remove pseudo-elementos (as duplicações visuais) */
+div[data-baseweb="select"]::before,
+div[data-baseweb="select"]::after,
+div[data-baseweb="select"] div[class*="ControlContainer"]::before,
+div[data-baseweb="select"] div[class*="ControlContainer"]::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 5️⃣ Mantém apenas a seta visível */
+div[data-baseweb="select"] svg {
+  color: #000 !important;
+  display: inline-block !important;
+}
+
+/* === SELECTBOX: APENAS UMA BORDA, SEM GLOW === */
+
+/* zera qualquer borda interna que gere a 2ª linha */
+div[data-baseweb="select"] > div,
+div[data-baseweb="select"] div[class*="ControlContainer"],
+div[data-baseweb="select"] div[class*="ValueContainer"] {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+/* borda única (preta) no wrapper */
+div[data-baseweb="select"] {
+  border: 2px solid #000000 !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  box-shadow: none !important;      /* sem segunda linha */
+  outline: none !important;
+}
+
+/* NO FOCO: só troca a cor da MESMA borda (sem brilho) */
+div[data-baseweb="select"]:focus,
+div[data-baseweb="select"]:focus-visible,
+div[data-baseweb="select"]:focus-within {
+  border-color: #2D6A4F !important; /* verde no foco */
+  box-shadow: none !important;       /* remove o halo/“borda 2” */
+  outline: none !important;
+}
+
+/* garante que nenhum filho volte a desenhar sombra/outline */
+div[data-baseweb="select"] *:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* === AJUSTE DE TAMANHO DO TEXTO NOS CAMPOS E SELECTS === */
+input, textarea, select, div[data-baseweb="select"] * {
+  font-size: 17px !important;   /* aumenta o texto interno dos campos */
+  line-height: 1.5 !important;
+}
+
+/* ajusta também os rótulos e legendas (labels) */
+label, p, span {
+  font-size: 16px !important;
+}
+
+/* títulos mantêm proporção harmoniosa */
+h1 {
+  font-size: 2.4rem !important;
+}
+h2 {
+  font-size: 1.6rem !important;
+}
+
+/* === CORRIGE CAMPOS COM AUTOFILL (DEIXA VERDE EM VEZ DE DOURADO) === */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  border: 1.6px solid #2D6A4F !important; /* verde escuro */
+  -webkit-text-fill-color: #000000 !important; /* texto preto */
+  box-shadow: 0 0 0px 1000px #ffffff inset !important; /* fundo branco */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Quando o campo com autofill está em foco */
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  border: 1.6px solid #2D6A4F !important; /* borda verde no foco */
+  box-shadow: 0 0 4px rgba(45, 106, 79, 0.3) !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Remove a cor amarela padrão do Safari/Chrome */
+input:-internal-autofill-selected {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* === AJUSTE DE POSIÇÃO DOS TÍTULOS === */
+h1 {
+  margin-top: 0.3rem !important;   /* antes: valor padrão alto */
+  margin-bottom: 0.3rem !important;
+  text-align: center !important;
+  font-size: 2.3rem !important;
+  font-weight: 800 !important;
+}
+
+h2 {
+  margin-top: 0rem !important;     /* elimina o espaço extra entre h1 e h2 */
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+}
+
+
+/* === AJUSTE DE POSIÇÃO DOS TÍTULOS (REDUZ ESPAÇO ENTRE ELES E O TOPO) === */
+
+/* remove espaçamento vertical extra no container do topo */
+section.main > div:first-child {
+    padding-top: 0rem !important;
+    margin-top: 0rem !important;
+}
+
+/* títulos principais */
+h1 {
+    margin-top: -0.8rem !important;   /* sobe o h1 */
+    margin-bottom: 0.3rem !important;
+    text-align: center !important;
+    font-size: 2.3rem !important;
+    font-weight: 800 !important;
+}
+
+/* subtítulo */
+h2 {
+    margin-top: -0.3rem !important;   /* elimina espaço extra entre h1 e h2 */
+    margin-bottom: 0.8rem !important;
+    text-align: center !important;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+}
+
+/* título intermediário (Controle de Presença) */
+h3 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 1.5rem !important;
+    text-align: center !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+}
+
+
+/* === ALINHA O TÍTULO "CONTROLE DE PRESENÇA" À ESQUERDA === */
+h3 {
+  text-align: left !important;
+  margin-left: 1rem !important;  /* desloca um pouco da borda esquerda */
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;  /* espaço entre os emojis e o texto */
+}
