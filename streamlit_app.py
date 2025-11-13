@@ -202,15 +202,18 @@ if st.session_state.autenticado:
     """, height=0)
     # 🔄 Agora seu app segue normalmente: conexão com Sheets, layout, formulário etc.
 
-
 # --- Conexão com Google Sheets ---
+config = dict(st.secrets["gcp_service_account"])  # cópia mutável do st.secrets
+config["private_key"] = config["private_key"].replace("\\n", "\n")  # corrigindo quebra de linha
+
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gcp_service_account"], scope)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(config, scope)
 client = gspread.authorize(creds)
 
 planilha = client.open("Controle de Presença 2026")
 aba_base = planilha.worksheet("BaseDeCriancas")
 aba_presencas = planilha.worksheet("Presencas")
+
 
 # --- Cache da base ---
 @st.cache_data(ttl=60)
