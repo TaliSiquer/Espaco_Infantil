@@ -1,20 +1,13 @@
 import streamlit as st
 from datetime import datetime
 import gspread
-
-import streamlit.components.v1 as components
-import time
-
 from google.oauth2.service_account import Credentials
 
-# --- 🔐 Lê as credenciais do secrets.toml ---
-from google.oauth2.service_account import Credentials
-
-# Corrigir as quebras de linha do secrets
+# Lê secrets e corrige o \n
 config = dict(st.secrets["gcp_service_account"])
 config["private_key"] = config["private_key"].replace("\\n", "\n")
 
-# Autenticação com o Google
+# Autentica com Google Sheets API
 creds = Credentials.from_service_account_info(
     config,
     scopes=[
@@ -25,6 +18,7 @@ creds = Credentials.from_service_account_info(
 
 client = gspread.authorize(creds)
 
+# Acesso às abas da planilha
 planilha = client.open("Controle de Presença 2026")
 aba_base = planilha.worksheet("BaseDeCriancas")
 aba_presencas = planilha.worksheet("Presencas")
