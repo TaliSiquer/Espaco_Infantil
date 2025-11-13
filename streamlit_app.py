@@ -1,10 +1,31 @@
 import streamlit as st
 from datetime import datetime
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+
 import streamlit.components.v1 as components
 import time
 
+from google.oauth2.service_account import Credentials
+
+# --- 🔐 Lê as credenciais do secrets.toml ---
+config = dict(st.secrets["gcp_service_account"])  # copia o conteúdo
+config["private_key"] = config["private_key"].replace("\\n", "\n")  # corrige o formato da chave
+
+# --- 🔗 Conexão com Google Sheets ---
+creds = Credentials.from_service_account_info(
+    config,
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+)
+
+client = gspread.authorize(creds)
+
+# (depois disso você pode abrir a planilha normalmente)
+planilha = client.open("Controle de Presença 2026")
+aba_base = planilha.worksheet("BaseDeCriancas")
+aba_presencas = planilha.worksheet("Presencas")
 
 # ======================================
 # 🔐 AUTENTICAÇÃO ANTES DE QUALQUER COISA
@@ -203,11 +224,20 @@ if st.session_state.autenticado:
     # 🔄 Agora seu app segue normalmente: conexão com Sheets, layout, formulário etc.
 
 # --- Conexão com Google Sheets ---
-config = dict(st.secrets["gcp_service_account"])  # cópia mutável do st.secrets
-config["private_key"] = config["private_key"].replace("\\n", "\n")  # corrigindo quebra de linha
+config = dict(st.secrets["gcp_service_account"])
+config["private_key"] = config["private_key"].replace("\\n", "\n")
 
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_dict(config, scope)
+from google.oauth2.service_account import Credentials
+import gspread
+
+creds = Credentials.from_service_account_info(
+    config,
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+)
+
 client = gspread.authorize(creds)
 
 planilha = client.open("Controle de Presença 2026")
