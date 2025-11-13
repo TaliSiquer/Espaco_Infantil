@@ -2,33 +2,27 @@ import streamlit as st
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import streamlit.components.v1 as components
 import time
 
-import streamlit as st
-import streamlit.components.v1 as components
 
-# --- Carrega CSS ---
-with open("style.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+# ======================================
+# 🔐 AUTENTICAÇÃO ANTES DE QUALQUER COISA
+# ======================================
 
-# ======== BLOQUEIO POR SENHA SIMPLES ========
-
-import streamlit as st
-
-# senha definida por você
 SENHA_CORRETA = "CCB@2026_espacoinfantil"
 
-# verifica se o usuário já passou pela autenticação
 if "autenticado" not in st.session_state:
     st.session_state.autenticado = False
 
-# se ainda não autenticou, mostra o campo de senha
+# Solicita a senha se ainda não autenticou
 if not st.session_state.autenticado:
     senha_digitada = st.text_input("🔐 Digite a senha para acessar o formulário:", type="password")
 
     if senha_digitada == SENHA_CORRETA:
         st.session_state.autenticado = True
         st.success("✅ Acesso autorizado!")
+        time.sleep(1.2)
         st.rerun()
     elif senha_digitada:
         st.error("❌ Senha incorreta. Tente novamente.")
@@ -36,170 +30,179 @@ if not st.session_state.autenticado:
     else:
         st.stop()
 
-# CSS customizado
-st.markdown("""
-<style>
-/* ======= GERAL ======= */
-html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], section.main {
-    background-color: #fafafa !important;
-    color: #000 !important;
-    font-family: "Segoe UI", sans-serif !important;
-}
+# ======================================
+# 🎨 TODA INTERFACE A PARTIR DAQUI
+# Só é executada se já estiver autenticado
+# ======================================
 
-/* ======= TÍTULOS ======= */
-h1 {
-    text-align: center;
-    font-size: 2.4rem !important;
-    font-weight: 800;
-    margin-bottom: 0.2rem;
-}
+# --- Carrega CSS ---
+with open("style.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-h2 {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #333;
-    margin-top: 0.2rem;
-    margin-bottom: 1.5rem;
-}
 
-/* ======= FORM ======= */
-.stForm {
-    background: #ffffff;
-    border: 2px solid #000000;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-}
+if st.session_state.autenticado:
 
-/* ======= INPUTS ======= */
-input, textarea, select {
-    background-color: #fff !important;
-    color: #000 !important;
-    border: 1.8px solid #000 !important;
-    border-radius: 10px !important;
-    padding: 0.6rem !important;
-    font-size: 16px !important;
-}
 
-input:focus, textarea:focus, select:focus {
-    border-color: #28a745 !important;
-    box-shadow: 0 0 8px rgba(40, 167, 69, 0.35) !important;
-    outline: none !important;
-}
+    
+    # --- CSS EMBUTIDO ---
+    st.markdown("""
+    <style>
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], section.main {
+        background-color: #fafafa !important;
+        color: #000 !important;
+        font-family: "Segoe UI", sans-serif !important;
+    }
 
-/* ======= SELECTBOX PADRÃO ======= */
-div[data-baseweb="select"], div[data-baseweb="select"] > div {
-    background-color: #ffffff !important;
-    color: #000 !important;
-    border: 1.8px solid #000 !important;
-    border-radius: 10px !important;
-    box-shadow: none !important;
-}
+    h1 {
+        text-align: center;
+        font-size: 2.4rem !important;
+        font-weight: 800;
+        margin-bottom: 0.2rem;
+    }
 
-div[data-baseweb="select"] span,
-div[data-baseweb="select"] svg {
-    color: #000 !important;
-}
+    h2 {
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        margin-top: 0.2rem;
+        margin-bottom: 1.5rem;
+    }
 
-div[data-baseweb="select"]:hover {
-    border-color: #28a745 !important;
-    box-shadow: 0 0 8px rgba(40, 167, 69, 0.25) !important;
-}
+    .stForm {
+        background: #ffffff;
+        border: 2px solid #000000;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
 
-/* ======= DROPDOWN ESCURO (BaseWeb menu) ======= */
-ul[role="listbox"] {
-    background-color: #ffffff !important;
-    border: 1.5px solid #000000 !important;
-    border-radius: 10px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-    z-index: 9999 !important;
-}
+    input, textarea, select {
+        background-color: #fff !important;
+        color: #000 !important;
+        border: 1.8px solid #000 !important;
+        border-radius: 10px !important;
+        padding: 0.6rem !important;
+        font-size: 16px !important;
+    }
 
-ul[role="listbox"] > li {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    font-size: 15px !important;
-    padding: 10px 16px !important;
-    border-bottom: 1px solid #eee !important;
-}
+    input:focus, textarea:focus, select:focus {
+        border-color: #28a745 !important;
+        box-shadow: 0 0 8px rgba(40, 167, 69, 0.35) !important;
+        outline: none !important;
+    }
 
-ul[role="listbox"] > li:hover {
-    background-color: #f0f0f0 !important;
-    color: #000 !important;
-}
+    div[data-baseweb="select"], div[data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        color: #000 !important;
+        border: 1.8px solid #000 !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+    }
 
-/* ======= BOTÃO CENTRAL ======= */
-div.stButton {
-    display: flex !important;
-    justify-content: center !important;
-    margin-top: 2rem;
-}
+    div[data-baseweb="select"] span,
+    div[data-baseweb="select"] svg {
+        color: #000 !important;
+    }
 
-div.stButton > button {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    font-size: 16px !important;
-    border-radius: 12px !important;
-    border: 1.5px solid #000000 !important;
-    padding: 0.6em 1.8em !important;
-    cursor: pointer !important;
-    transition: 0.3s ease-in-out !important;
-}
+    div[data-baseweb="select"]:hover {
+        border-color: #28a745 !important;
+        box-shadow: 0 0 8px rgba(40, 167, 69, 0.25) !important;
+    }
 
-div.stButton > button:hover {
-    background-color: #333333 !important;
-    transform: translateY(-1px) !important;
-}
+    ul[role="listbox"] {
+        background-color: #ffffff !important;
+        border: 1.5px solid #000000 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        z-index: 9999 !important;
+    }
 
-/* ======= REMOVE CABEÇALHO STREAMLIT ======= */
-header, div[data-testid="stHeader"], section[data-testid="stHeader"] {
-    display: none !important;
-}
-</style>
-""", unsafe_allow_html=True)
+    ul[role="listbox"] > li {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 15px !important;
+        padding: 10px 16px !important;
+        border-bottom: 1px solid #eee !important;
+    }
 
-# JS para estilizar dinamicamente o dropdown
-components.html("""
-<script>
-function aplicarEstiloDropdown() {
-  const dropdown = document.querySelector('ul[data-testid="stSelectboxVirtualDropdown"]');
-  if (dropdown) {
-    dropdown.style.backgroundColor = "#ffffff";
-    dropdown.style.border = "2px solid #000000";
-    dropdown.style.borderRadius = "12px";
-    dropdown.style.boxShadow = "0 6px 12px rgba(0,0,0,0.1)";
-    dropdown.style.zIndex = "9999";
+    ul[role="listbox"] > li:hover {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+    }
 
-    const options = dropdown.querySelectorAll('li[role="option"]');
-    options.forEach(opt => {
-      opt.style.backgroundColor = "#ffffff";
-      opt.style.color = "#000000";
-      opt.style.padding = "10px 16px";
-      opt.style.fontSize = "16px";
-      opt.style.borderBottom = "1px solid #eee";
-      opt.style.cursor = "pointer";
+    div.stButton {
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 2rem;
+    }
 
-      opt.addEventListener("mouseenter", () => {
-        opt.style.backgroundColor = "#f2f2f2";
+    div.stButton > button {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        border-radius: 12px !important;
+        border: 1.5px solid #000000 !important;
+        padding: 0.6em 1.8em !important;
+        cursor: pointer !important;
+        transition: 0.3s ease-in-out !important;
+    }
+
+    div.stButton > button:hover {
+        background-color: #333333 !important;
+        transform: translateY(-1px) !important;
+    }
+
+    header, div[data-testid="stHeader"], section[data-testid="stHeader"] {
+        display: none !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # --- JS dos dropdowns ---
+    import streamlit.components.v1 as components
+    components.html("""
+     aplicarEstiloDropdown();
+    <script>
+    function aplicarEstiloDropdown() {
+      const dropdown = document.querySelector('ul[data-testid="stSelectboxVirtualDropdown"]');
+      if (dropdown) {
+        dropdown.style.backgroundColor = "#ffffff";
+        dropdown.style.border = "2px solid #000000";
+        dropdown.style.borderRadius = "12px";
+        dropdown.style.boxShadow = "0 6px 12px rgba(0,0,0,0.1)";
+        dropdown.style.zIndex = "9999";
+
+        const options = dropdown.querySelectorAll('li[role="option"]');
+        options.forEach(opt => {
+          opt.style.backgroundColor = "#ffffff";
+          opt.style.color = "#000000";
+          opt.style.padding = "10px 16px";
+          opt.style.fontSize = "16px";
+          opt.style.borderBottom = "1px solid #eee";
+          opt.style.cursor = "pointer";
+
+          opt.addEventListener("mouseenter", () => {
+            opt.style.backgroundColor = "#f2f2f2";
+          });
+          opt.addEventListener("mouseleave", () => {
+            opt.style.backgroundColor = "#ffffff";
+          });
+        });
+      }
+
+      const observer = new MutationObserver(() => {
+        for (let i = 0; i < 20; i++) {
+          setTimeout(aplicarEstiloDropdown, i * 100);
+        }
       });
-      opt.addEventListener("mouseleave", () => {
-        opt.style.backgroundColor = "#ffffff";
-      });
-    });
-  }
-}
+      observer.observe(document.body, { childList: true, subtree: true });
+    </script>
+    """, height=0)
+    # 🔄 Agora seu app segue normalmente: conexão com Sheets, layout, formulário etc.
 
-// Monitoramento para aplicar o estilo sempre que aparecer
-const observer = new MutationObserver(() => {
-  for (let i = 0; i < 20; i++) {
-    setTimeout(aplicarEstiloDropdown, i * 100);
-  }
-});
-observer.observe(document.body, { childList: true, subtree: true });
-</script>
-""", height=0)
+
 # --- Conexão com Google Sheets ---
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
@@ -209,7 +212,6 @@ planilha = client.open("Controle de Presença 2026")
 aba_base = planilha.worksheet("BaseDeCriancas")
 aba_presencas = planilha.worksheet("Presencas")
 
-
 # --- Cache da base ---
 @st.cache_data(ttl=60)
 def carregar_base():
@@ -217,12 +219,10 @@ def carregar_base():
     nomes = [str(linha["Nome Completo"]).strip() for linha in dados if linha.get("Nome Completo")]
     return dados, nomes
 
-
 # --- Tela de carregamento ---
 with st.spinner("🔄 Carregando dados do Google Sheets..."):
     dados_base, nomes_existentes = carregar_base()
     time.sleep(1)  # deixa o spinner visível por 1 segundo para suavizar a transição
-
 
 # --- SOMENTE APÓS O CARREGAMENTO, EXIBE O APP COMPLETO ---
 if dados_base:
@@ -244,10 +244,13 @@ if st.session_state.get("limpar", False):
             st.session_state[campo] = ""
     st.session_state.tipo_cadastro = "Cadastro Existente"
     st.session_state.limpar = False
- 
-# --- Exibe feedback após reload ---
+
+# --- Exibe feedback temporário ---
 if st.session_state.get("feedback"):
-    st.success(st.session_state.feedback)
+    placeholder = st.empty()  # cria um espaço temporário
+    placeholder.success(st.session_state.feedback)
+    time.sleep(3)  # tempo em segundos que a mensagem fica visível
+    placeholder.empty()  # remove a mensagem
     st.session_state.feedback = None
  
 # --- Estado persistente ---
@@ -271,7 +274,6 @@ tipo_cadastro = st.selectbox(
     index=0 if st.session_state.tipo_cadastro == "Cadastro Existente" else 1,
 )
 st.session_state.tipo_cadastro = tipo_cadastro
-
 
 # --- Se mudar o tipo de cadastro, limpa os campos visuais (sem afetar a lógica atual) ---
 if "ultimo_tipo_cadastro" not in st.session_state:
@@ -406,5 +408,5 @@ if enviar:
             if campo in st.session_state:
                 del st.session_state[campo]
  
-        time.sleep(0.6)
+        time.sleep(0.3)
         st.rerun()
