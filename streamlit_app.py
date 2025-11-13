@@ -8,21 +8,23 @@ import time
 from google.oauth2.service_account import Credentials
 
 # --- 🔐 Lê as credenciais do secrets.toml ---
-config = dict(st.secrets["gcp_service_account"])  # copia o conteúdo
-config["private_key"] = config["private_key"].replace("\\n", "\n")  # corrige o formato da chave
+from google.oauth2.service_account import Credentials
 
-# --- 🔗 Conexão com Google Sheets ---
+# Corrigir as quebras de linha do secrets
+config = dict(st.secrets["gcp_service_account"])
+config["private_key"] = config["private_key"].replace("\\n", "\n")
+
+# Autenticação com o Google
 creds = Credentials.from_service_account_info(
     config,
     scopes=[
         "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
+        "https://www.googleapis.com/auth/drive",
+    ],
 )
 
 client = gspread.authorize(creds)
 
-# (depois disso você pode abrir a planilha normalmente)
 planilha = client.open("Controle de Presença 2026")
 aba_base = planilha.worksheet("BaseDeCriancas")
 aba_presencas = planilha.worksheet("Presencas")
@@ -223,26 +225,6 @@ if st.session_state.autenticado:
     """, height=0)
     # 🔄 Agora seu app segue normalmente: conexão com Sheets, layout, formulário etc.
 
-# --- Conexão com Google Sheets ---
-config = dict(st.secrets["gcp_service_account"])
-config["private_key"] = config["private_key"].replace("\\n", "\n")
-
-from google.oauth2.service_account import Credentials
-import gspread
-
-creds = Credentials.from_service_account_info(
-    config,
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
-)
-
-client = gspread.authorize(creds)
-
-planilha = client.open("Controle de Presença 2026")
-aba_base = planilha.worksheet("BaseDeCriancas")
-aba_presencas = planilha.worksheet("Presencas")
 
 
 # --- Cache da base ---
