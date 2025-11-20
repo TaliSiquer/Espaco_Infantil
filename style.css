@@ -613,3 +613,28 @@ h3 {
   align-items: center;
   gap: 0.4rem;  /* espaço entre os emojis e o texto */
 }
+
+
+/* Forçar dropdown claro apenas no desktop (baseweb select) */
+@media (min-width: 600px) {
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid #DADADA !important;
+    }
+
+    .stSelectbox div[data-baseweb="select"] ul {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .stSelectbox div[data-baseweb="select"] li {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .stSelectbox div[data-baseweb="select"] li:hover {
+        background-color: #f2f2f2 !important;
+        color: black !important;
+    }
+}

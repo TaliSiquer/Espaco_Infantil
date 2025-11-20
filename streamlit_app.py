@@ -240,7 +240,7 @@ if not dados_base:
 
 # ======= TOPO VISUAL =======
 st.markdown('<h1 class="ccb-header">Congregação Cristã no Brasil</h1>', unsafe_allow_html=True)
-st.markdown("<h2>Espaço Infantil – CCB Vila Formosa</h2>", unsafe_allow_html=True)
+st.markdown("<h2>Espaço Bíblico Infantil – Vila Formosa</h2>", unsafe_allow_html=True)
 st.markdown('<div class="ccb-section-title">👶👧🧒 Controle de Presença</div>', unsafe_allow_html=True)
 
 # --- LIMPEZA AUTOMÁTICA ---
