@@ -46,15 +46,23 @@ if not st.session_state.autenticado:
 
 if st.session_state.autenticado:
 
-    # CSS INLINE (primeiro)
+    # 1) CSS EXTERNO → carrega primeiro
+    try:
+        with open("style.css") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    except FileNotFoundError:
+        pass
+
+    # 2) CSS INLINE → SOBRESCREVE O style.css
     st.markdown("""
     <style>
         h1 {
             text-align: center !important;
-            font-size: 3.2rem !important;   /* ⬅️ AQUI AUMENTA */
+            font-size: 3.2rem !important;
             font-weight: 800 !important;
             margin-bottom: 0.3rem !important;
         }
+
         h2 {
             text-align: center !important;
             font-size: 1.6rem !important;
@@ -63,14 +71,6 @@ if st.session_state.autenticado:
         }
     </style>
     """, unsafe_allow_html=True)
-
-    # CSS externo carregado POR ÚLTIMO
-    try:
-        with open("style.css") as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-    except FileNotFoundError:
-        pass
-
     
     # --- JS dos dropdowns ---
     components.html("""
