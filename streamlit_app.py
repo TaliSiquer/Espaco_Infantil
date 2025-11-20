@@ -53,14 +53,15 @@ if st.session_state.autenticado:
     except FileNotFoundError:
         pass
 
-    # 2) CSS INLINE → SOBRESCREVE O style.css
+    # 2) CSS INLINE → sobrescreve o style.css
     st.markdown("""
     <style>
-        h1 {
+        .ccb-titulo {
+            font-size: 3.4rem !important;
+            font-weight: 900 !important;
             text-align: center !important;
-            font-size: 3.2rem !important;
-            font-weight: 800 !important;
-            margin-bottom: 0.3rem !important;
+            margin-top: 0.5rem !important;
+            margin-bottom: 0.5rem !important;
         }
 
         h2 {
@@ -71,7 +72,6 @@ if st.session_state.autenticado:
         }
     </style>
     """, unsafe_allow_html=True)
-    
     # --- JS dos dropdowns ---
     components.html("""
     <script>
@@ -151,7 +151,7 @@ if not dados_base:
     st.stop()
 
 # ======= TOPO VISUAL =======
-st.markdown('<h1 class="ccb-header">Congregação Cristã no Brasil</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="ccb-titulo">Congregação Cristã no Brasil</h1>', unsafe_allow_html=True)
 st.markdown("<h2>Espaço Bíblico Infantil – Vila Formosa</h2>", unsafe_allow_html=True)
 st.markdown('<div class="ccb-section-title">👶👧🧒 Controle de Presença</div>', unsafe_allow_html=True)
 
