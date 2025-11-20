@@ -62,6 +62,7 @@ if st.session_state.autenticado:
             text-align: center !important;
             margin-top: 0.5rem !important;
             margin-bottom: 0.5rem !important;
+            line-height: 1.15 !important;
         }
 
         h2 {
@@ -72,47 +73,30 @@ if st.session_state.autenticado:
         }
     </style>
     """, unsafe_allow_html=True)
+
     # --- JS dos dropdowns ---
     components.html("""
     <script>
     function aplicarEstiloDropdown() {
-      const dropdown = document.querySelector('ul[data-testid="stSelectboxVirtualDropdown"]');
-      if (dropdown) {
-        dropdown.style.backgroundColor = "#ffffff";
-        dropdown.style.border = "2px solid #000000";
-        dropdown.style.borderRadius = "12px";
-        dropdown.style.boxShadow = "0 6px 12px rgba(0,0,0,0.1)";
-        dropdown.style.zIndex = "9999";
-
-        const options = dropdown.querySelectorAll('li[role="option"]');
-        options.forEach(opt => {
-          opt.style.backgroundColor = "#ffffff";
-          opt.style.color = "#000000";
-          opt.style.padding = "10px 16px";
-          opt.style.fontSize = "16px";
-          opt.style.borderBottom = "1px solid #eee";
-          opt.style.cursor = "pointer";
-
-          opt.addEventListener("mouseenter", () => {
-            opt.style.backgroundColor = "#f2f2f2";
-          });
-          opt.addEventListener("mouseleave", () => {
-            opt.style.backgroundColor = "#ffffff";
-          });
-        });
-      }
+        const dropdown = document.querySelector('ul[data-testid="stSelectboxVirtualDropdown"]');
+        if (dropdown) {
+            dropdown.style.backgroundColor = "#ffffff";
+            dropdown.style.border = "2px solid #000000";
+            dropdown.style.borderRadius = "12px";
+            dropdown.style.boxShadow = "0 6px 12px rgba(0,0,0,0.1)";
+            dropdown.style.zIndex = "9999";
+        }
     }
 
     const observer = new MutationObserver(() => {
-      for (let i = 0; i < 20; i++) {
-        setTimeout(aplicarEstiloDropdown, i * 100);
-      }
+        for (let i = 0; i < 20; i++) {
+            setTimeout(aplicarEstiloDropdown, i * 100);
+        }
     });
     observer.observe(document.body, { childList: true, subtree: true });
     aplicarEstiloDropdown();
     </script>
     """, height=0)
-
 # ======================================
 # 🔗 CONEXÃO COM GOOGLE SHEETS (via st.secrets)
 # ======================================
