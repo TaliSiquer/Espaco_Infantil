@@ -614,4 +614,20 @@ h3 {
   gap: 0.4rem;  /* espaço entre os emojis e o texto */
 }
 
+/* === CENTRALIZA O BOTÃO DO FORM DE FORMA ABSOLUTA === */
+div[data-testid="stFormSubmitButton"] {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
 
+div[data-testid="stFormSubmitButton"] button,
+div[data-testid="stFormSubmitButton"] > button {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}

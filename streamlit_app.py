@@ -36,13 +36,40 @@ if not st.session_state.autenticado:
 # ======================================
 
 # CSS externo (se existir)
-try:
-    with open("style.css") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-except FileNotFoundError:
-    pass
+#try:
+    #with open("style.css") as f:
+        #st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+#except FileNotFoundError:
+    #pass
+
+#if st.session_state.autenticado: #
 
 if st.session_state.autenticado:
+
+    # CSS INLINE (primeiro)
+    st.markdown("""
+    <style>
+        h1 {
+            text-align: center !important;
+            font-size: 3.2rem !important;   /* ⬅️ AQUI AUMENTA */
+            font-weight: 800 !important;
+            margin-bottom: 0.3rem !important;
+        }
+        h2 {
+            text-align: center !important;
+            font-size: 1.6rem !important;
+            font-weight: 600 !important;
+            margin-bottom: 1.2rem !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # CSS externo carregado POR ÚLTIMO
+    try:
+        with open("style.css") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    except FileNotFoundError:
+        pass
 
     # --- CSS EMBUTIDO ---
     st.markdown("""
@@ -53,16 +80,16 @@ if st.session_state.autenticado:
         font-family: "Segoe UI", sans-serif !important;
     }
 
-    h1 {
-        text-align: center;
-        font-size: 2.4rem !important;
-        font-weight: 800;
-        margin-bottom: 0.2rem;
-    }
+h1 {
+        text-align: center !important;
+        font-size: 3.2rem !important;  /* << AQUI AUMENTA */
+        font-weight: 800 !important;
+        margin-bottom: 0.3rem !important;
+}
 
     h2 {
         text-align: center;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         font-weight: 600;
         color: #333;
         margin-top: 0.2rem;
